@@ -1,3 +1,3 @@
 import ProjectDescription
 
-let config = Config(cache: .cache(path: .relativeToRoot("Cache"))]))
+let config = Config(cache: .cache(path: .relativeToRoot("Cache")))
