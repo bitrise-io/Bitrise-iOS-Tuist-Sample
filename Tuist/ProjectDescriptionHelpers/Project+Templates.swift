@@ -56,7 +56,7 @@ extension Project {
             bundleId: "io.bitrise.\(name)",
             infoPlist: .extendingDefault(with: mainInfoPlist),
             sources: ["Targets/\(name)/Sources/**"],
-            resources: ["Targets/\(name)/Resources/**"],
+            resources: [],
             dependencies: dependencies
         )
         
