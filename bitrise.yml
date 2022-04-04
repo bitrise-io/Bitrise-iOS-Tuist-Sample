@@ -1,0 +1,39 @@
+---
+format_version: '11'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: ios
+workflows:
+  primary:
+    description: |
+      The workflow executes the tests. The *retry_on_failure* test repetition mode is enabled.
+
+      Next steps:
+      - Check out [Getting started with iOS apps](https://devcenter.bitrise.io/en/getting-started/getting-started-with-ios-apps.html).
+    steps:
+    - activate-ssh-key@4: {}
+    - git-clone@6: {}
+    - cache-pull@2: {}
+    - tuist@0:
+        inputs:
+        - command: test
+    - cache-push@2:
+        inputs:
+        - cache_paths: "$BITRISE_SOURCE_DIR/Cache"
+    - deploy-to-bitrise-io@2: {}
+meta:
+  bitrise.io:
+    stack: osx-xcode-13.2.x
+app:
+  envs:
+  - opts:
+      is_expand: false
+    BITRISE_PROJECT_PATH: "."
+  - opts:
+      is_expand: false
+    BITRISE_SCHEME: idontknow
+  - opts:
+      is_expand: false
+    BITRISE_DISTRIBUTION_METHOD: development
+trigger_map:
+- push_branch: main
+  workflow: primary
